@@ -1,0 +1,134 @@
+{%extends "User_pages/base.html"%}
+{% block title %}dashboard{% endblock %}
+
+{% block content %}
+<div class="mytabs">
+    <input type="radio" id="tabfree" name="mytabs" checked="checked">
+    <label for="tabfree">Listar</label>
+    <div class="tab">
+      <h2>Vehiculos Registrados</h2>
+      <table id="data" class="table table-striped">
+        <thead>
+          <tr>
+            <th>user id</th>
+            <th>Brand</th>
+            <th>Model</th>
+            {% if current_user.is_superuser == 2 %}
+            <th>options</th>
+            {% endif %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for vehicle in vehicles %}
+            <tr>
+              <td>{{ vehicle.user_id }}</td>
+              <td>{{ vehicle.brand }}</td>
+              <td>{{ vehicle.model }}</td>
+              {% if current_user.is_superuser ==2 %}
+              <td>
+                <a href="#" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                <a href="#" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+              </td>
+              {% endif %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <input type="radio" id="tabsilver" name="mytabs">
+    <label for="tabsilver">Agregar</label>
+    <div class="tab">
+      <h2>Registrar</h2>
+      <form action="" method="POST" enctype="multipart/form-data">
+        {{form.hidden_tag()}}
+        <div class="form-group">
+            <label>User id</label>
+            {{form.user_id}}
+        </div>
+        <div class="form-group">
+            <label>Brand</label>
+            {{form.brand}}
+        </div>
+        <div class="form-group">
+            <label>Model</label>
+            {{form.model}}
+        </div>
+        <div class="form-group">
+            <label>Licence Card</label>
+            {{form.file}}
+        </div>
+        {{form.submit}}
+      </form>
+    </div>
+
+    <input type="radio" id="tabgold" name="mytabs">
+    <label for="tabgold">Anotaciones</label>
+    <div class="tab">
+      <h2>Anotaciones</h2>
+      <form action="" method="POST">
+        {{form2.hidden_tag()}}
+        <div class="form-group">
+          <label for="">Vehicle ID</label>
+          {{form2.vehicle_id}}
+        </div>
+        <div class="form-group">
+          <label for="">Anotation</label>
+          {{form2.textfield}}
+        </div><br>
+        {{form2.submit}}
+      </form>
+    </div>
+</div>
+<style>
+  .mytabs {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 1500px;
+      margin: 50px auto;
+      padding: 25px;
+  }
+  .mytabs input[type="radio"] {
+      display: none;
+  }
+  .mytabs label {
+      padding: 25px;
+      background: #e2e2e2;
+      font-weight: bold;
+  }
+  
+  .mytabs .tab {
+      width: 100%;
+      padding: 20px;
+      background: #fff;
+      order: 1;
+      display: none;
+  }
+  .mytabs .tab h2 {
+      font-size: 3em;
+  }
+  
+  .mytabs input[type='radio']:checked + label + .tab {
+      display: block;
+  }
+  
+  .mytabs input[type="radio"]:checked + label {
+      background: #fff;
+  }
+  </style>
+{% endblock %}
+{% block scripts %}
+<script>
+    $(document).ready(function () {
+      $('#data').DataTable({
+        columns: [
+          null,
+          {searchable: false},
+          null],
+      });
+    });
+  </script>
+{% endblock %}
+
+
+

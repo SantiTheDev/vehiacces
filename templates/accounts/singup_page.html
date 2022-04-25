@@ -1,0 +1,81 @@
+{% extends "accounts/base.html" %}
+
+{% block title %}SingUp{% endblock %}
+
+{% block content %}
+<section class="vh-100 gradient-custom">
+  <div class="container py-5 h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-12 col-lg-9 col-xl-7">
+        <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+          <div class="card-body p-4 p-md-5">
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
+            <form class="form" action="" method="POST">
+              <div class="row">
+                <div class="col-md-6 mb-4">
+    
+                  <div class="form-outline">
+                    <label for="First name" class="form-label">first name</label>
+                    <input type="text" class="form-control" name="first_name">
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <label for="Last name" class="form-label">Last name</label>
+                    <input type="text" class="form-control" name="last_name">
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4 d-flex align-items-center">
+                  <div class="form-outline datepicker w-100">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" name="username">
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-4 pb-2">
+
+                  <div class="form-outline">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="contra">
+                  </div>
+
+                </div>
+    
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4 pb-2">
+
+                  <div class="form-outline">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" name="email">
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-4 pb-2">
+
+                  <div class="form-outline">
+                    <label for="phone number" class="form-label">Phone number</label>
+                    <input type="text" class="form-control" name="phone_number">
+                  </div>
+
+                </div>
+              </div>
+              <div class="mt-4 pt-2">
+                <button type="submit" class="btn btn-primary">Register</button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

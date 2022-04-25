@@ -1,0 +1,46 @@
+{% extends "accounts/base.html" %}
+
+{% block title %}login{% endblock %}
+
+{% block content %}
+<div class="container" >
+    <div class="row">
+        <div class="col">
+            
+        </div>
+    
+        <div class="col">
+            <h1 class="fw-bold text-center py-5">Bienvenido</h1>
+
+            <!--LOGUIN-->
+            <form action="" method="POST">
+                <div class="mb-4">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" name="username">
+                </div>
+                <div class="mb-4">
+                    <label for="contra" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="contra">
+                </div>
+                <div class="mb-4 form-check">
+                    <input type="checkbox" name="connected" class="form-check-input">
+                    <label for="conected" class="form-check-label">Recordarme</label>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Ingresar</button>
+                </div>
+                <div class="mb-3">
+                    <span>¿No tienes cuenta?<a href="{{url_for('registration')}}">Registrate </a></span><br>
+                    <span><a href="#">Recuperar Pasword </a></span>
+                </div>
+                
+                </div>
+            </form>
+            <div class="col">
+            
+            </div>
+        </div>
+    
+    </div>
+</div>
+{% endblock %}

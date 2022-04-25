@@ -1,0 +1,135 @@
+{%extends "User_pages/base.html"%}
+
+{% block title %}dashboard{% endblock %}
+
+{% block content %}
+<div class="mytabs">
+    <input type="radio" id="tabfree" name="mytabs" checked="checked">
+    <label for="tabfree">Listar</label>
+    <div class="tab">
+      <h2>Lista de Usuarios</h2>
+      <table id="data" class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>last Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            {% if current_user.is_superuser == 2 %}
+            <th>options</th>
+            {%endif%}
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+            <tr>
+              <td>{{ user.first_name }}</td>
+              <td>{{ user.last_name }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.phone_number }}</td>
+              {% if current_user.is_superuser == 2 %}
+              <td>
+                <a href="{{url_for('vuserupdate', id = user.id)}}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                <a href="{{url_for('vuserdelete', id = user.id)}}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+              </td>
+              {% endif %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <input type="radio" id="tabsilver" name="mytabs">
+    <label for="tabsilver">Registrar</label>
+    <div class="tab">
+        <form action="" method="POST">
+            {{form.hidden_tag()}}
+            <div class="form-group">
+                <label>First Name</label>
+                {{form.first_name}}
+            </div>
+            <div class="form-group">
+                <label>Last Name</label>
+                {{form.last_name}}
+            </div>
+            <div class="form-group">
+              <label>Vehicle Id</label>
+              {{form.vehicle_id}}
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                {{form.email}}
+            </div>
+            <div class="form-group">
+                <label>Phone Number</label>
+                {{form.phone_number}}
+            </div>
+            <div class="form-group">
+                <label>Role</label>
+                {{form.role}}
+            </div>
+            {{form.submit}}
+        </form>
+    </div>
+    <!-- 
+    <input type="radio" id="tabgold" name="mytabs">
+    <label for="tabgold">Gold</label>
+    <div class="tab">
+      <h2>Gold</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+    </div>
+    -->
+</div>
+<style>
+  .mytabs {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 1500px;
+      margin: 50px auto;
+      padding: 25px;
+  }
+  .mytabs input[type="radio"] {
+      display: none;
+  }
+  .mytabs label {
+      padding: 25px;
+      background: #e2e2e2;
+      font-weight: bold;
+  }
+  
+  .mytabs .tab {
+      width: 100%;
+      padding: 20px;
+      background: #fff;
+      order: 1;
+      display: none;
+  }
+  .mytabs .tab h2 {
+      font-size: 3em;
+  }
+  
+  .mytabs input[type='radio']:checked + label + .tab {
+      display: block;
+  }
+  
+  .mytabs input[type="radio"]:checked + label {
+      background: #fff;
+  }
+  </style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function () {
+      $('#data').DataTable({
+        columns: [
+          null,
+          {searchable: false},
+          null,   
+          null
+        ],
+      });
+    });
+  </script>
+{% endblock %}
